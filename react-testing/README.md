@@ -62,3 +62,29 @@ Implementation details
 Third party code eg: MUI components as it is already well tested
 code that is not imp from user point of view
 
+## RTL queries:
+
+Every test we write generally involves the following basic steps
+
+1.Render the component
+2.Find an element rendered by the component
+3.Assert aginst the element found in step 2 which will pass or fail the test  
+
+To render the component we use render method from RTL
+ For assertion , we use  expect passing in a  value  and combine it with  a matcher function from jest  or jest-dom 
+
+Queries are the methods that Testing library provide sto find the elemnt on the page
+
+To find the single element on the page, we have
+
+1.getBy..
+2.queryBy..
+3.findBy..
+
+To find multiple, we have
+
+1.getAllBy..
+2.queryAllBy..
+3.findAllBy..
+
+
