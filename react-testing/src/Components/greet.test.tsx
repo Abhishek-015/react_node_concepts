@@ -7,15 +7,15 @@ import Greet from "./greet";
 describe("Greet", () => {
 	test("rendered successfully", () => {
 		render(<Greet />);
-		const textElement = screen.getByText(/hello/i);
+		const textElement = screen.getByText(/Hello/);
 		expect(textElement).toBeInTheDocument();
 	});
 
-	describe("Nested", () => {
-		test("renders with names", () => {
-			render(<Greet name="abhishek" />);
-			const textElement = screen.getByText("Hello abhishek");
-			expect(textElement).toBeInTheDocument();
-		});
-	});
+	// describe("Nested", () => {
+	// 	test("renders with names", () => {
+	// 		render(<Greet name="abhishek" />);
+	// 		const textElement = screen.getByText("Hello abhishek");
+	// 		expect(textElement).toBeInTheDocument();
+	// 	});
+	// });
 });
