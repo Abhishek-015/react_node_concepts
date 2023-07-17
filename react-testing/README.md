@@ -48,3 +48,17 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Testing library doc
 
 You can learn more in (https://github.com/testing-library/jest-dom).
+
+## What to test? ---> There are no specific rules but there are some guidelines to follow:
+
+test component renders
+test component renders with prop
+test component render in  different states
+test component reacts to events
+
+## What not to test?
+
+Implementation details
+Third party code eg: MUI components as it is already well tested
+code that is not imp from user point of view
+
