@@ -1,0 +1,39 @@
+<!-- Problem statement - Create a clearAllTimer function on window that will clear
+all running timeout functions on dom -->
+<script>
+  //to store ids
+  window.timeoutIds = []
+
+  const originialSetTimeout = window.setTimeout
+
+  window.setTimeout = function (fn, delay) {
+    //id of the setTimeout
+    const id = originialSetTimeout(fn, delay)
+    console.log({ id, timeoutIds })
+    timeoutIds.push(id)
+  }
+
+  window.clearAllTimeouts = function () {
+    while (timeoutIds.length) {
+      clearTimeout(timeoutIds.pop())
+    }
+  }
+
+  setTimeout(() => {
+    console.log('1')
+  }, 1000)
+
+  setTimeout(() => {
+    console.log('2')
+  }, 2000)
+  setTimeout(() => clearAllTimeouts(), 2500)
+
+  setTimeout(() => {
+    console.log('3')
+  }, 3000)
+  setTimeout(() => console.log('2.3'), 2300)
+
+  setTimeout(() => {
+    console.log('4')
+  }, 4000)
+</script>

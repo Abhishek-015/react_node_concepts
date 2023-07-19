@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+  padding: 10px;
+}
+
+label{
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.App > form{
+  width: 500px;
+  border: 1px solid lightgray;
+  margin:100px auto;
+}
+
+.App > form > div{
+  width: 400px;
+  margin: 50px auto;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+  display: block;
+  width: 350px;
+  line-height: 1.42;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border:1px solid black;
+  border-radius: 5px;
+}
+
+.error{
+  font-size: 12px;
+  text-align: left;
+  color: red  ;
+  margin-bottom: 20px;
+}
