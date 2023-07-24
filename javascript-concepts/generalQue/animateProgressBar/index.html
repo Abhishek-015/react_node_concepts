@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .progressBar {
+        height: 10px;
+        width: 0%;
+        margin: 10px 0px;
+        background-color: green;
+      }
+
+      .fullWidth {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button onclick="add()">start progress</button>
+    <div id="root"></div>
+  </body>
+
+  <script>
+    const container = document.getElementById('root')
+
+    let count = 0
+    function add() {
+      if (count === 0) {
+        createProgressBar()
+      }
+
+      count += 1
+    }
+
+    const createProgressBar = (n = 3) => {
+      const ele = document.createElement('div')
+      ele.classList.add('progressBar')
+      ele.style = `transition: width ${n}s ease;`
+      container.appendChild(ele)
+
+      setTimeout(() => ele.classList.add('fullWidth'), 50)
+
+      ele.addEventListener('transitionend', () => {
+        ele.remove()
+        count -= 1
+        if (count >= 1) {
+          createProgressBar()
+        }
+      })
+
+      ele.removeEventListener('transitionend', () => {})
+    }
+  </script>
+</html>
