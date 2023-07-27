@@ -1,0 +1,52 @@
+<!-- find all dom elements with color red -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root" style="color: white;">
+      <span style="color: red;">Red</span>
+      <span style="color: orange;">Orange</span>
+      <span style="color: #f00;">Red</span>
+      <span style="color: #ff0000;">Red</span>
+      <span style="color: rgb(255, 0, 0);">Red</span>
+      <span>Black</span>
+    </div>
+  </body>
+  <script>
+    const uniqueColorCode = (colorCode) => {
+      const div = document.createElement('div')
+      div.style.color = colorCode
+      document.body.appendChild(div)
+      const computedColor = window.getComputedStyle(div)
+      const { color } = computedColor
+      document.body.removeChild(div)
+      return color
+    }
+
+    const findElements = (ele, color) => {
+      const standardColor = uniqueColorCode(color)
+      const output = []
+
+      const searchElement = (element) => {
+        const eleComputedColor = uniqueColorCode(element.style.color)
+        if (standardColor === eleComputedColor) {
+          output.push(element)
+        }
+
+        for (let child of element.children) {
+          searchElement(child)
+        }
+      }
+
+      searchElement(ele)
+      return output
+    }
+
+    console.log(findElements(document.getElementById('root'), 'black'))
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const obj = {
+      type: 'div',
+      props: { id: 'hello' },
+      children: [{ type: 'h1', children: 'hello' }],
+    }
+
+    const createReactDOM = (domObj, entryPoint) => {
+      const helper = (obj) => {
+        const { type, props, children } = domObj
+        const ele = document.createElement(type)
+
+        if (props) {
+          for (let property in props) {
+            ele[property] = props[property]
+          }
+        }
+
+        if (typeof children === 'string') {
+          ele.innerText = children
+        } else {
+          const fragment = document.createDocumentFragment()
+          for (let child of children) {
+            fragment.appendChild(helper(child))
+          }
+          ele.appendChild(fragment)
+        }
+        return ele
+      }
+
+      const res = helper(domObj)
+      entryPoint.appendChild(res)
+    }
+
+    createReactDOM(obj, document.getElementById('root'))
+  </script>
+</html>
