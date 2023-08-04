@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <!-- <style>
+    div[id='root']
+      > section:nth-child(2)
+      > p:nth-child(1)
+      > span:nth-child(1)
+      > button:nth-child(2) {
+      color: red;
+    }
+  </style> -->
+  <body>
+    <div id="root">
+      <article>
+        Generate the css selector for the target element having id = "target" ,
+        you are provide with two elements id
+      </article>
+      <section>
+        <p>
+          <span>
+            Your target element is here in this span childs.
+            <button>click</button>
+            <button id="target">click me</button>
+            <span>data</span>
+          </span>
+        </p>
+      </section>
+    </div>
+  </body>
+  <script>
+    function cssGenerator(root, target) {
+      const selector = []
+
+      while (root !== target) {
+        const nthChild =
+          Array.from(target.parentNode.children).indexOf(target) + 1
+        const generateSelector = `${target.tagName.toLowerCase()}:nth-child(${nthChild})`
+        selector.unshift(generateSelector)
+        target = target.parentNode
+      }
+
+      const rootSelector = `${target.tagName.toLowerCase()}[id="${target.id}"]`
+
+      selector.unshift(rootSelector)
+
+      return selector.join(' > ')
+    }
+    const root = document.getElementById('root')
+    const target = document.getElementById('target')
+    console.log(cssGenerator(root, target))
+  </script>
+</html>

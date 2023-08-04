@@ -6,12 +6,13 @@
 
 const memoized = (func) => {
 	let tempObject = {};
-	return function (args) {
-		if (tempObject.hasOwnProperty(args)) {
-			return tempObject[args];
+	return function (...args) {
+		const cache = JSON.stringify(args);
+		if (tempObject.hasOwnProperty(cache)) {
+			return tempObject[cache];
 		} else {
-			const computedValue = func(args);
-			tempObject = { ...tempObject, [args]: computedValue };
+			const computedValue = func(...args);
+			tempObject = { ...tempObject, [cache]: computedValue };
 			return computedValue;
 		}
 	};
@@ -27,15 +28,28 @@ function factorial(n) {
 
 const fn = (x) => x * 10;
 
+const expensiveFunction = (num1 = 1, num2 = 1) => {
+	for (var i = 0; i < 10000000; i++) {}
+	return num1 * num2;
+};
+
 const memoizedFunc = memoized(factorial);
 
-console.time("test timer")
-console.log(memoizedFunc(102));
-console.timeEnd("test timer")
+// console.time("test timer");
+// console.log(memoizedFunc(102));
+// console.timeEnd("test timer");
 
-console.time("test timer")
-console.log(memoizedFunc(102));
-console.timeEnd("test timer")
+// console.time("test timer");
+// console.log(memoizedFunc(102));
+// console.timeEnd("test timer");
+
+console.time("test timer 2");
+console.log(expensiveFunction(2, 3));
+console.timeEnd("test timer 2");
+
+console.time("test timer 2");
+console.log(expensiveFunction(2, 3));
+console.timeEnd("test timer 2");
 
 // console.log(memoizedFunc(4));
 // console.log(memoizedFunc(5));

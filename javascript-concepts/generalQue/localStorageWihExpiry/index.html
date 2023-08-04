@@ -1,0 +1,68 @@
+<script>
+  // solution 1
+  window.localStorageWithExpiry = {
+    setItem: function (key, value, expiryTime) {
+      const data = {
+        value,
+        expiryTime: Date.now() + expiryTime,
+      }
+
+      localStorage.setItem(key, JSON.stringify(data))
+    },
+    getItem: function (key) {
+      const getData = JSON.parse(localStorage.getItem(key))
+      if (getData.expiryTime < Date.now()) {
+        localStorage.removeItem(key)
+        return null
+      } else {
+        return getData.value
+      }
+    },
+    removeItem: function (key) {
+      localStorage.removeItem(key)
+    },
+    clear: function () {
+      localStorage.clear()
+    },
+  }
+
+  localStorageWithExpiry.setItem('key', 'abhishek', 5000)
+
+  setTimeout(() => {
+    console.log(localStorageWithExpiry.getItem('key'))
+  }, 4000)
+
+  setTimeout(() => {
+    console.log(localStorageWithExpiry.getItem('key'))
+  }, 6000)
+
+  // solution 2
+
+  //   window.localStorageWithExpiry = {
+  //     setItem: function (key, value, expiryTime) {
+  //       localStorage.setItem(key, JSON.stringify(value))
+  //       setTimeout(() => {
+  //         localStorage.removeItem(key)
+  //       }, expiryTime)
+  //     },
+  //     getItem: function (key) {
+  //       return JSON.parse(localStorage.getItem(key))
+  //     },
+  //     removeItem: function (key) {
+  //       localStorage.removeItem(key)
+  //     },
+  //     clear: function () {
+  //       localStorage.clear()
+  //     },
+  //   }
+
+  //   localStorageWithExpiry.setItem('key', 'abhishek', 5000)
+
+  //   setTimeout(() => {
+  //     console.log(localStorageWithExpiry.getItem('key'))
+  //   }, 4000)
+
+  //   setTimeout(() => {
+  //     console.log(localStorageWithExpiry.getItem('key'))
+  //   }, 6000)
+</script>

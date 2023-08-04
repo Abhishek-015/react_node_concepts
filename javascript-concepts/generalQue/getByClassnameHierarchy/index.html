@@ -1,0 +1,47 @@
+<!-- Input :  getByClassnameHierarchy(node,a>c), output : "c-3" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="a" id="a-1">
+      <div class="b" id="b-1">
+        <div class="c" id="c-1"></div>
+        <div class="c" id="c-2"></div>
+      </div>
+      <div class="c" id="c-3"></div>
+    </div>
+  </body>
+  <script>
+    const getByClassnameHierarchy = (node, classHeirarchy) => {
+      const selectorArray = classHeirarchy.split('>')
+      const result = []
+
+      traverseDOM(node, selectorArray, 0, result)
+
+      return result
+    }
+
+    const traverseDOM = (ele, classes, index, result) => {
+      const targetClass = classes[index]
+      if (index === classes.length - 1 && ele.classList.contains(targetClass)) {
+        result.push(ele.id)
+        return
+      }
+      for (let child of ele.children) {
+        if (ele.classList.contains(targetClass)) {
+          traverseDOM(child, classes, index + 1, result)
+        } else {
+          traverseDOM(child, classes, 0, result)
+        }
+      }
+    }
+
+    const root = document.getElementById('a-1')
+    console.log(getByClassnameHierarchy(root, 'c'))
+  </script>
+</html>
