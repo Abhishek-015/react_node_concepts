@@ -96,6 +96,7 @@ const YoutubeForm = () => {
 				<div className="form-control">
 					<label htmlFor="username">User name</label>
 					<input
+						readOnly
 						type="text"
 						id="username"
 						{...register("username", { required: { value: true, message: "Username is required" } })}
