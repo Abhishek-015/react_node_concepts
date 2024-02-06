@@ -1,8 +1,8 @@
 const add = (...params) => {
 	return function (...args) {
-	   if(args.length){
-        return add()
-       }
+		if (args.length) {
+			return add();
+		}
 	};
 };
 
